@@ -16,7 +16,7 @@ const options = {
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
 };
-mongoose.connect('mongodb://127.0.0.1:27017/local', options).then(
+mongoose.connect('mongodb://0.0.0.0:27017/local', options).then(
   () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
   err => { /** handle initial connection error */ }
 );
