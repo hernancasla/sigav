@@ -1,0 +1,23 @@
+<h2>Users</h2>
+<p>View users or <a href="../users/edit">add</a> a user.</p>
+<% if (locals.flash) { %>
+    <p><%= flash %></p>
+<% } %>
+<ul>
+    <li class="header">
+        <span class="field">Name</span>
+        <span class="field">Email</span>
+        <span class="field">Age</span>
+        <span class="field">Actions</span>
+    </li>
+    <% for(var i=0; i<users.length; i++) {%>
+            <li class="row">
+                <span class="field"><%= users[i]['name'] %></span>
+                <span class="field"><%= users[i]['userName'] %></span>
+                <span class="field"><%= users[i]['age'] %></span>
+                <span class="field">
+                    <a href="<%= users[i]._id %>" >users</a>
+                </span>
+            </li>
+    <% } %>
+</ul>
