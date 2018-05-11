@@ -1,23 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href='/javascripts/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-    <link rel='stylesheet' type='text/css' href='/javascripts/fullcalendar.min.css' />
 
-    
-  </head>
-  <body>
-      <script type='text/javascript' src='/javascripts/jquery-3.3.1.min.js'></script>
-      <script src='/javascripts/moment.min.js'></script>
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+  <link href='/javascripts/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+  <link rel='stylesheet' type='text/css' href='/javascripts/fullcalendar.min.css' />
 
-      <script type='text/javascript' src='/javascripts/fullcalendar.min.js'></script>
-      
 
-      <script src="/javascripts/index.js"></script>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <div id="calendar"></div>
-  </body>
+</head>
+
+<body>
+  <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
+  <script src='/javascripts/moment.min.js'></script>
+  <script src='/javascripts/bootstrap.min.js'></script>
+  <script type='text/javascript' src='/javascripts/fullcalendar.min.js'></script>
+  <script src="/javascripts/index.js"></script>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to
+    <%= title %>
+  </p>
+  <div id="calendar"></div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-tittle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-md-12">
+              <dt>Fecha</dt>
+              <dd id="modal-date"></dd>
+            </div>
+            <div class="col-md-6">
+              <dt>Inicio</dt>
+              <dd id="modal-start"></dd>
+            </div>
+            <div class="col-md-6">
+              <dt>Fin</dt>
+              <dd id="modal-end"></dd>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <dt>usuarios</dt>
+              <div id="modal-users">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
 </html>
