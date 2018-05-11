@@ -26,6 +26,8 @@ $(document).ready(function () {
                 type: 'agenda',
                 dayCount: 1,
                 allDaySlot: false,
+                minTime:'08:00:00',
+                maxTime:'21:00:00'
             }
         },
         dayClick: function (date, view) {
