@@ -63,7 +63,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://localhost:3000/events/", // A valid URL
+            url: "serversigav:3000/events/", // A valid URL
             headers: { "X-HTTP-Method-Override": "POST" }, // X-HTTP-Method-Override set to PUT.
             data: event,
             success: successCallback,
@@ -74,7 +74,7 @@ $(document).ready(function () {
     function successCallback(data) {
         console.log(data);
         jQuery("#event").modal("hide");
-        window.open("http://localhost:3000/","_self");
+        window.open("serversigav:3000/","_self");
 
     }
     function errorCallback(e) {
