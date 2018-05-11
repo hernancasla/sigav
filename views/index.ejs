@@ -9,16 +9,17 @@
   <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
   <link href='/javascripts/fullcalendar.print.min.css' rel='stylesheet' media='print' />
   <link rel='stylesheet' type='text/css' href='/javascripts/fullcalendar.min.css' />
-
+  <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap-datepicker.css' />
 
 </head>
 
 <body>
   <script type='text/javascript' src='/javascripts/jquery.min.js'></script>
-  <script src='/javascripts/moment.min.js'></script>
-  <script src='/javascripts/bootstrap.min.js'></script>
+  <script type='text/javascript' src='/javascripts/moment.min.js'></script>
+  <script type='text/javascript' src='/javascripts/bootstrap.min.js'></script>
+
   <script type='text/javascript' src='/javascripts/fullcalendar.min.js'></script>
-  <script src="/javascripts/index.js"></script>
+  <script type='text/javascript' src="/javascripts/index.js"></script>
   <h1>
     <%= title %>
   </h1>
@@ -27,48 +28,50 @@
   </p>
   <div id="calendar"></div>
   <!-- Modal -->
-  <div id="myModal" class="modal fade" role="dialog">
+  <div id="event" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal-tittle">Modal title</h5>
+          <h5 class="modal-title">Evento</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-
-          <div class="row">
-            <div class="col-md-12">
-              <dt>Fecha</dt>
-              <dd id="modal-date"></dd>
+          <form>
+            <div class="form-group">
+              <label for="modal-title">Titulo</label>
+              <input type="text" class="form-control" id="modal-title" placeholder="Titulo">
             </div>
-            <div class="col-md-6">
-              <dt>Inicio</dt>
-              <dd id="modal-start"></dd>
+            <div class="form-group">
+                <label for="modal-date">Fecha</label>
+                <input type="date" class="form-control" id="modal-date" placeholder="Fecha">
+              </div>
+            <div class="form-group">
+              <label for="modal-start">Inicio</label>
+              <input type="time" class="form-control" id="modal-start" placeholder="Inicio">
             </div>
-            <div class="col-md-6">
-              <dt>Fin</dt>
-              <dd id="modal-end"></dd>
+            <div class="form-group">
+              <label for="modal-end">Fin</label>
+              <input type="time" class="form-control" id="modal-end" placeholder="Fin">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="form-group">
               <dt>usuarios</dt>
               <div id="modal-users">
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="modal-save" >Guardar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-
     </div>
   </div>
 </body>
+<script type='text/javascript' src='/javascripts/bootstrap-datepicker.min.js' />
 
 </html>

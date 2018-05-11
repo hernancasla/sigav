@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
  */
 
 var eventsSchema = new Schema({
-    name: 'String',
+    title: 'String',
     start: 'Date',
     end: 'Date'
 });
