@@ -1,18 +1,12 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
+        lang: 'es',
         events: '/events',
         customButtons: {
             myCustomButton: {
                 text: 'Agregar Evento',
                 click: function () {
-                    $('#modal-title').val('');
-                    $('#modal-date').val('');
-        
-                     $('#modal-start').val('');
-                     $('#modal-end').val('');
-                     $('#modal-users').html('');
-
-                    $("#event").modal();
+                    openEventModal();
                 }
             }
         },
@@ -26,13 +20,17 @@ $(document).ready(function () {
                 type: 'agenda',
                 dayCount: 1,
                 allDaySlot: false,
-                minTime:'08:00:00',
-                maxTime:'21:00:00'
+                minTime: '08:00:00',
+                maxTime: '21:00:00'
             }
         },
-        dayClick: function (date, view) {
-            debugger;
-            $('#calendar').fullCalendar('changeView', 'agenda1Day', date);
+        dayRender: function (date, element, view) {
+            element.bind('dblclick', function () {
+                openEventModal();
+            });
+            // element.bind('click', function () {
+            //     $('#calendar').fullCalendar('changeView', 'agenda1Day', date);
+            // });
         },
         eventClick: function (calEvent, jsEvent, view) {
             debugger;
@@ -76,7 +74,7 @@ $(document).ready(function () {
     function successCallback(data) {
         console.log(data);
         jQuery("#event").modal("hide");
-        window.open("http://18.216.155.225:3000/","_self");
+        window.open("http://18.216.155.225:3000/", "_self");
 
     }
     function errorCallback(e) {
@@ -89,5 +87,15 @@ $(document).ready(function () {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
+    }
+    function openEventModal() {
+        $('#modal-title').val('');
+        $('#modal-date').val('');
+
+        $('#modal-start').val('');
+        $('#modal-end').val('');
+        $('#modal-users').html('');
+
+        $("#event").modal();
     }
 });
