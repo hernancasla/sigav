@@ -70,7 +70,7 @@ $(document).ready(function () {
     $('#modal-save').click(function () {
         let event = {};
         debugger;
-        event._id = $('#modal-id').val();
+        let id = $('#modal-id').val();
         var days = $("input[type='checkbox']:checked").map((i, e) => Number(e.value)).toArray()
         event.startDate = new Date($('#modal-startDate').val());
         event.endDate = new Date($('#modal-endDate').val());
@@ -80,9 +80,9 @@ $(document).ready(function () {
         event.frequency = $('#modal-frequency').val();
         event.days = days;
         $.ajax({
-            type: event._id ? 'PUT' : 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+            type: id ? 'PUT' : 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://"+server+":3000/events/"+(event._id ? event._id :""), // A valid URL
+            url: "http://"+server+":3000/events/"+(id ? event._id :""), // A valid URL
             headers: { "X-HTTP-Method-Override": "POST" }, // X-HTTP-Method-Override set to PUT.
             data: event,
             success: successCallback,
