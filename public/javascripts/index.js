@@ -82,7 +82,7 @@ $(document).ready(function () {
         $.ajax({
             type: id ? 'PUT' : 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://"+server+":3000/events/"+(id ? event._id :""), // A valid URL
+            url: "http://"+server+":3000/events/"+(id ? id :""), // A valid URL
             headers: { "X-HTTP-Method-Override": "POST" }, // X-HTTP-Method-Override set to PUT.
             data: event,
             success: successCallback,
