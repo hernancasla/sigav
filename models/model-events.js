@@ -9,8 +9,12 @@ var mongoose = require('mongoose'),
 
 var eventsSchema = new Schema({
     title: 'String',
-    start: 'Date',
-    end: 'Date'
+    startDate: 'Date',
+    endDate: 'Date',
+    frequency: 'Number',
+    days:[Number],
+    startTime: 'String',
+    endTime: 'String'
 });
 
 module.exports = mongoose.model('events', eventsSchema);

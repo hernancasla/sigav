@@ -6,3 +6,5 @@ body {
 a {
   color: #00B7FF;
 }
+.has-success .form-control{ border-color:inherit !important;}
+.has-success .form-control:focus { border-color:inherit !important;}

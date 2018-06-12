@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
         lang: 'es',
-        events: '/events',
+        events: '/events/formated',
         customButtons: {
             myCustomButton: {
                 text: 'Agregar Evento',
@@ -35,11 +35,17 @@ $(document).ready(function () {
         eventClick: function (calEvent, jsEvent, view) {
             debugger;
             $('#modal-title').val(calEvent.title);
-            $('#modal-date').val(calEvent.start.format("YYYY-MM-DD"));
+            $('#modal-startDate').val(moment(calEvent.startDate).utcOffset(3 * 60).format("YYYY-MM-DD"));
+            $('#modal-endDate').val(moment(calEvent.endDate).utcOffset(3 * 60).format("YYYY-MM-DD"));
 
-            $('#modal-start').val(calEvent.start.format("HH:MM"));
-            $('#modal-end').val(calEvent.end.format("HH:MM"));
+            $('#modal-startTime').val(calEvent.startTime);
+            $('#modal-endTime').val(calEvent.endTime);
+            $('#modal-frequency').val(calEvent.frequency);
+            $('#modal-id').val(calEvent._id);
 
+            calEvent.days.forEach(e => {
+                $("input[type=checkbox][value="+e+"]").prop("checked",true);
+            })
 
             var users = ["hernan", "brian", "lore", "juan", "hernan", "brian", "lore", "juan"];
             var labels = ["primary", "secondary", "success", "danger", "warning", "info"];
@@ -53,23 +59,35 @@ $(document).ready(function () {
 
         }
     });
-
+    function validate(title) {
+        return $.ajax({
+            type: 'GET', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+            dataType: 'json', // Set datatype - affects Accept header
+            url: "http://localhost:3000/events/find/" + title, // A valid URL
+            headers: { "X-HTTP-Method-Override": "GET" }, // X-HTTP-Method-Override set to PUT.
+        });
+    }
     $('#modal-save').click(function () {
         let event = {};
-        event.start = new Date($('#modal-date').val() + " " + $('#modal-start ').val());
-        event.end = new Date($('#modal-date').val() + " " + $('#modal-end ').val());
+        debugger;
+        event._id = $('#modal-id').val();
+        var days = $("input[type='checkbox']:checked").map((i, e) => Number(e.value)).toArray()
+        event.startDate = new Date($('#modal-startDate').val());
+        event.endDate = new Date($('#modal-endDate').val());
+        event.startTime = $('#modal-startTime').val();
+        event.endTime = $('#modal-endTime').val();
         event.title = $('#modal-title').val();
-
+        event.frequency = $('#modal-frequency').val();
+        event.days = days;
         $.ajax({
-            type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+            type: event._id ? 'PUT' : 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://18.216.155.225:3000/events/", // A valid URL
+            url: "http://localhost:3000/events/"+(event._id ? event._id :""), // A valid URL
             headers: { "X-HTTP-Method-Override": "POST" }, // X-HTTP-Method-Override set to PUT.
             data: event,
             success: successCallback,
             error: errorCallback
         });
-
     });
     function successCallback(data) {
         console.log(data);
@@ -78,7 +96,7 @@ $(document).ready(function () {
 
     }
     function errorCallback(e) {
-        console.log(e)
+        console.log(e);
     }
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
@@ -98,4 +116,5 @@ $(document).ready(function () {
 
         $("#event").modal();
     }
+
 });
