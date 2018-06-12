@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var server = "18.216.155.225";
     $('#calendar').fullCalendar({
         lang: 'es',
         events: '/events/formated',
@@ -33,7 +34,6 @@ $(document).ready(function () {
             // });
         },
         eventClick: function (calEvent, jsEvent, view) {
-            debugger;
             $('#modal-title').val(calEvent.title);
             $('#modal-startDate').val(moment(calEvent.startDate).utcOffset(3 * 60).format("YYYY-MM-DD"));
             $('#modal-endDate').val(moment(calEvent.endDate).utcOffset(3 * 60).format("YYYY-MM-DD"));
@@ -63,7 +63,7 @@ $(document).ready(function () {
         return $.ajax({
             type: 'GET', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://localhost:3000/events/find/" + title, // A valid URL
+            url: "http://"+server+":3000/events/find/" + title, // A valid URL
             headers: { "X-HTTP-Method-Override": "GET" }, // X-HTTP-Method-Override set to PUT.
         });
     }
@@ -82,7 +82,7 @@ $(document).ready(function () {
         $.ajax({
             type: event._id ? 'PUT' : 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             dataType: 'json', // Set datatype - affects Accept header
-            url: "http://localhost:3000/events/"+(event._id ? event._id :""), // A valid URL
+            url: "http://"+server+":3000/events/"+(event._id ? event._id :""), // A valid URL
             headers: { "X-HTTP-Method-Override": "POST" }, // X-HTTP-Method-Override set to PUT.
             data: event,
             success: successCallback,
@@ -92,7 +92,7 @@ $(document).ready(function () {
     function successCallback(data) {
         console.log(data);
         jQuery("#event").modal("hide");
-        window.open("http://18.216.155.225:3000/", "_self");
+        window.open("http://"+server+":3000/", "_self");
 
     }
     function errorCallback(e) {
